@@ -14,7 +14,7 @@ class ApicultorSerializer(serializers.HyperlinkedModelSerializer):
 class ApiarioSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Apiario
-        fields = ('url','apicultor', 'qtd_colmeias', 'localizacao')
+        fields = ('url','apicultor', 'tipo', 'qtd_colmeias', 'localizacao')
 
 class CaixaRacionalSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

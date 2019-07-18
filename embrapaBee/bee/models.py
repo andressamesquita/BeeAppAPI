@@ -15,16 +15,26 @@ class Apicultor(models.Model):
 
     def __str__(self):
         return self.nome
+
+    @property
+    def get_perdas(self):
+        return Perda.objects.filter(id=self.id)
     
     
 class Apiario(models.Model):
+    TIPO_CHOICES = (
+        ('MELIPONARIO', 'Meliponário'),
+        ('APIÁRIO', 'Apiário'),
+    )
+    
+    tipo = models.CharField(max_length=11, choices=TIPO_CHOICES, null=False, blank=False)
     qtd_colmeias = models.IntegerField()
     apicultor = models.ForeignKey('Apicultor', on_delete=models.CASCADE, related_name="apiarios")
     localizacao = models.CharField(max_length=255, null=False)
     
 
     def __str__(self):
-        return 'Api '+ str(self.id) + ' - ' + str(self.apicultor)
+        return str(self.tipo) + '  ' + str(self.id) + ' - ' + str(self.apicultor) 
     
     def excluir_apiario(self):
         self.delete() 
@@ -49,7 +59,7 @@ class Perda(models.Model):
     qtd_colmeias_perdidas = models.IntegerField()
     data_registro_perda = models.DateTimeField(auto_now_add=True)
     especie_perdida = models.CharField(max_length=255, null=False)
-    #foto_perda = models.FileField(required=False)
+    #foto_perda = models.ImageField(upload_to='fotos_perdas', null=True, blank = True)
     apiario = models.ForeignKey('Apiario', on_delete=models.CASCADE, related_name="perdas")
 
     class Meta:
