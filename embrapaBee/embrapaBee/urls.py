@@ -15,21 +15,39 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from rest_framework import routers
-from bee import views
+from bee.views import *
+from usuarios.views import *
+from django.contrib.auth import views as v
+from rest_framework.authtoken.views import obtain_auth_token
 
+from django.conf import settings
+from django.conf.urls.static import static
+
+
+
+from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r'usuarios', views.UserViewSet)
-router.register(r'apicultores', views.ApicultorViewSet)
-router.register(r'apiarios', views.ApiarioViewSet)
-router.register(r'caixas_racionais', views.CaixaRacionalViewSet)
-router.register(r'perdas', views.PerdaViewSet)
+router.register(r'usuarios', UserViewSet)
+router.register(r'apicultores', ApicultorViewSet)
+router.register(r'apiarios', ApiarioViewSet)
+router.register(r'caixas_racionais', CaixaRacionalViewSet)
+router.register(r'perdas', PerdaViewSet)
 
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('index', index, name='index'),
+
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('apicultor/redefinir_senha',RedefinirSenhaView.as_view(), name='redefinir_senha'),
+    path('registrar/', RegistrarUsuarioView.as_view(), name="registrar"),
+    path('login/', v.LoginView.as_view(), name="login"),
+    path('logout/', v.LogoutView.as_view(template_name = 'login.html'), name="logout"),
 
-]
+
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns = router.urls + urlpatterns

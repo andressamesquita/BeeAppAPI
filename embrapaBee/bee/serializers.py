@@ -4,7 +4,7 @@ from bee.models import *
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username','password','first_name', 'last_name')
+        fields = ('username','password', 'email')
 
 class ApicultorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

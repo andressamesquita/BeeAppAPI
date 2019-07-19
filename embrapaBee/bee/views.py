@@ -2,8 +2,22 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from bee.serializers import *
 from bee.models import *
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
+
+def index(request):
+	
+    contexto = {
+        'perfil_logado': get_usuario_logado(request)
+    }
+    
+    return render(request, 'index.html', contexto)
+
+@login_required
+def get_usuario_logado(request):	
+	return request.user
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

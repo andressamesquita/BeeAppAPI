@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block body %}
+
+{% if perfil_logado %}
+    <h4>Você está logado, apicultor!</h4>
+{% else %}
+    <h4>Você não está logado! :/</h4>
+{% endif %}
+
+
+{% endblock %}
