@@ -8,11 +8,9 @@ from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-	
     contexto = {
         'perfil_logado': get_usuario_logado(request)
     }
-    
     return render(request, 'index.html', contexto)
 
 @login_required

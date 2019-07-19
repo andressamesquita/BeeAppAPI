@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import include, path
 from bee.views import *
 from usuarios.views import *
-from django.contrib.auth import views as v
 from rest_framework.authtoken.views import obtain_auth_token
 
 from django.conf import settings
@@ -43,8 +42,8 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('apicultor/redefinir_senha',RedefinirSenhaView.as_view(), name='redefinir_senha'),
     path('registrar/', RegistrarUsuarioView.as_view(), name="registrar"),
-    path('login/', v.LoginView.as_view(), name="login"),
-    path('logout/', v.LogoutView.as_view(template_name = 'login.html'), name="logout"),
+    path('login/', LoginView.as_view(), name="login"),
+    
 
 
 
