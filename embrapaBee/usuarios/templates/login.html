@@ -1,6 +1,9 @@
 {% extends "base_usuario.html" %}
+{% load staticfiles %}
 {% block body %}
-	
+
+
+		
 	<form action="{% url 'login' %}" class="form-signin" role="form" method="post">
 		{% csrf_token %}
 		<h2 class="form-signin-heading">Login</h2>
@@ -18,13 +21,10 @@
 			<button type="button" class="close"
 				data-dismiss="alert" aria-hidden="true">x				
 			</button>
-			{{ form.non_field_errors }}
-			<p>Para reativar sua conta<a href="#">clique aqui</a></p>
 		</div>		
 		{% endif %}
 
 		<a href="{% url 'registrar' %}">Registre-se</a>
-		<a class="pull-right" href="#">Esqueci a senha</a>
 		
 	</form>
 

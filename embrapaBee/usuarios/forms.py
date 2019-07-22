@@ -6,7 +6,7 @@ class RegistrarUsuarioForm(forms.Form):
 	nome = forms.CharField(required=True)
 	email = forms.EmailField(required=True)
 	senha = forms.CharField(required=True)
-	qtd_apiarios = forms.IntegerField()
+	qtd_apiarios = forms.IntegerField(required=True)
 	tipo_criador = forms.CharField(required=True)
 
 	def adiciona_erro(self, message):
@@ -27,7 +27,7 @@ class RedefinirSenhaForm(forms.Form):
 
 class LoginForm(forms.Form):
 	username = forms.CharField(required=True)
-	senha = forms.CharField(required=True)
+	password = forms.CharField(required=True)
 
 	def adiciona_erro(self, message):
 		errors = self._errors.setdefault(forms.forms.NON_FIELD_ERRORS, forms.utils.ErrorList())

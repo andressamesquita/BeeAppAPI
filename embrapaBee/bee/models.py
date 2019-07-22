@@ -20,7 +20,6 @@ class Apicultor(models.Model):
     def get_perdas(self):
         return Perda.objects.filter(id=self.id)
    
-    
 class Apiario(models.Model):
     TIPO_CHOICES = (
         ('MELIPONARIO', 'Meliponário'),

@@ -7,23 +7,21 @@ from django.db import transaction
 from bee.models import Apicultor
 
 class LoginView(View):
-	template_name = 'login.html'
+    template_name = 'login.html'
 
-	def get(self, request):
-		return render (request, self.template_name)
+    def get(self, request):
+        return render(request, self.template_name)
 
-	def post(self, request):
-		form = LoginForm (request.POST)
-		if form.is_valid():
-			user = authenticate(username=request.POST['username'],
-                           password=request.POST["password"])
-		
-		if user is not None:
-			login(request, user)
-			return redirect('index')
+    def post(self, request):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+	
+        if user is not None:
+            login(request, user)
+            return redirect('index')
 
-		return render(request, self.template_name, {'form':form})
-
+        return render(request, self.template_name, {"form":form})
 
 class RegistrarUsuarioView(View):
 	template_name = 'registrar.html'

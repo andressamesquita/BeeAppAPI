@@ -2,17 +2,36 @@
 {% load staticfiles %}
 {% block body %}
 
+<h1>Teste</h1>
+
 {% if perfil_logado %}
     <h4>Você está logado, apicultor!</h4>
 {% else %}
     <h4>Você não está logado! :/</h4>
 {% endif %}
 
+<a href="{% url 'logout' %}">Sair</a>
 
-<!--não tá pegando-->
-<h3>{{perfil_logado.nome}}</h3>
-<h3>{{perfil_logado.qtd_apiarios}}</h3>
-<h3>{{perfil_logado.tipo_criador}}</h3>
+<h2>Dados do apicultor</h2>
+<h5>Apicultor: {{perfil_logado.apicultor.nome}}</h5>
+<h5>Quantidade de apiários: {{perfil_logado.apicultor.qtd_apiarios}}</h5>
+<h5>Tipo: {{perfil_logado.apicultor.tipo_criador}}</h5>
+
+<a href="{% url 'novoApiario' %}">Novo Apiario</a>
+
+<h2>Informações dos apiarios</h2>
+
+{% for apiario in apiarios %}
+    <h5>Proprietário: {{apiario.apicultor.nome}}</h5>
+    <h5>Tipo: {{apiario.tipo}}</h5>
+    <h5>Quantidade: {{apiario.qtd_colmeias}}</h5>
+    <h5>Localização: {{apiario.localizacao}}</h5>
+    <a href="{% url 'novaCaixaRacional' apiario.id %}">Add Caixa Racional</a>
+    <br>
+    <a href="{% url 'excluir_apiario' apiario.id %}">Excluir</a></td>
+    <h5>-----------------------------------------</h5>
+    
+{% endfor %}
 
 
 

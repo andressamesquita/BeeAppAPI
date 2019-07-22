@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block body %}
+
+<form class = "form-signin"  method="post" action="{% url 'novaCaixaRacional' apiario.id %}">
+	{% csrf_token %}
+
+	<h2 class="form-signin-heading">Adicione uma Caixa Racional</h2> 
+    
+    <input 	name="identificador" id = "id_identificador" class = "form-control" placeholder="Identificador" required autofocus>
+
+	<input 	name="especie" id = "id_especie" class = "form-control" placeholder="Especie">
+   
+	<button class="btn btn-lg btn-primary btn-block" type = "submit" value="CaixaRacional">Registrar</button>
+
+	{% if form.errors %}		
+	<div class="alert alert-danger">
+		<button type="button" class="close"
+				data-dismiss="alert" aria-hidden="true">x				
+		</button>
+		{{ form.non_field_errors }}
+	</div>		
+	{% endif %}
+</form>
+
+
+{% endblock %}

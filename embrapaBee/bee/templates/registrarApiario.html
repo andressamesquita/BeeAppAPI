@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block body %}
+
+<form class = "form-signin"  method="post" action="{% url 'novoApiario' %}">
+	{% csrf_token %}
+
+	<h2 class="form-signin-heading">Adicione seu (s) apiario</h2>
+    <select	name="tipo" id = "id_tipo" class = "form-control">
+        <option value="MELIPONÁRIO">Meliponário</option>
+        <option value="APIÁRIO">Apiário</option>
+    </select>     
+    
+    <input 	name="qtd_colmeias" id = "id_qtd_colmeias" class = "form-control" placeholder="Quantidade de colmeias" required autofocus>
+
+	<input 	name="localizacao" id = "id_localizacao" class = "form-control" placeholder="Localização">
+   
+	<button class="btn btn-lg btn-primary btn-block" type = "submit" value="Apiario">Registrar</button>
+
+	{% if form.errors %}		
+	<div class="alert alert-danger">
+		<button type="button" class="close"
+				data-dismiss="alert" aria-hidden="true">x				
+		</button>
+		{{ form.non_field_errors }}
+	</div>		
+	{% endif %}
+</form>
+
+
+{% endblock %}

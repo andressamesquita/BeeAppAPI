@@ -17,12 +17,10 @@ from django.contrib import admin
 from django.urls import include, path
 from bee.views import *
 from usuarios.views import *
-from rest_framework.authtoken.views import obtain_auth_token
+from django.contrib.auth import views as v
 
 from django.conf import settings
 from django.conf.urls.static import static
-
-
 
 from rest_framework import routers
 
@@ -36,15 +34,18 @@ router.register(r'perdas', PerdaViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('index', index, name='index'),
-
     path('admin/', admin.site.urls),
+
+    path('index', index, name='index'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('apicultor/redefinir_senha',RedefinirSenhaView.as_view(), name='redefinir_senha'),
     path('registrar/', RegistrarUsuarioView.as_view(), name="registrar"),
     path('login/', LoginView.as_view(), name="login"),
+    path('logout/', v.LogoutView.as_view(template_name = 'login.html'), name="logout"),
+    path('apicultor/apiarios/novo_apiario', RegistrarApiarioView.as_view(), name='novoApiario'),
+    path('apicultor/apiarios/<int:apiario_id>/excluir', deletar_apiario, name='excluir_apiario'),  
+    path('apiarios/caixa/<int:apiario_id>', RegistrarCaixaRacionalView.as_view(), name='novaCaixaRacional'),
     
-
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

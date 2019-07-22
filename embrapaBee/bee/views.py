@@ -1,21 +1,105 @@
 from django.shortcuts import render
 from rest_framework import viewsets
+from django.views.generic.base import View
 from bee.serializers import *
 from bee.models import *
+from usuarios import views
 from django.contrib.auth.decorators import login_required
-
+from bee.forms import *
 # Create your views here.
 
 
 def index(request):
+
+    perfil_logado = get_usuario_logado(request)
+    apiarios = Apiario.objects.filter(apicultor=perfil_logado.apicultor.id)
+    
     contexto = {
-        'perfil_logado': get_usuario_logado(request)
+        'perfil_logado': perfil_logado,
+        'apiarios': apiarios,
+        
     }
     return render(request, 'index.html', contexto)
 
 @login_required
 def get_usuario_logado(request):	
 	return request.user
+
+
+class RegistrarApiarioView(View):
+	template_name = 'registrarApiario.html'
+
+	def get(self, request):
+		return render (request, self.template_name)
+	
+	def post(self, request):
+		form = RegistrarApiarioForm(request.POST)
+		if form.is_valid ():
+			dados_form = form.cleaned_data
+			apiario = Apiario(apicultor = get_usuario_logado(request).apicultor, tipo = dados_form['tipo'], qtd_colmeias = dados_form['qtd_colmeias'], localizacao = dados_form['localizacao'])
+			apiario.save()
+			
+			usuario_logado = get_usuario_logado(request)
+			apiarios = Apiario.objects.filter(apicultor=usuario_logado.apicultor.id)
+
+			contexto = {
+				'perfil_logado': usuario_logado,
+				'apiarios': apiarios
+			}
+
+			return render(request, 'index.html', contexto)
+
+		return render(request, self.template_name, {'form':form})
+
+
+class RegistrarCaixaRacionalView(View):
+    template_name = 'registrarCaixaRacional.html'
+
+    def get(self, request, apiario_id):
+        apiario = Apiario.objects.get(id=apiario_id)
+
+        contexto = {
+            "apiario": apiario
+        }
+
+        return render (request, self.template_name, contexto)
+
+    def post(self, request, apiario_id):
+        form = RegistrarCaixaRacionalForm(request.POST)
+
+        if form.is_valid():
+            dados_form = form.cleaned_data
+            apiario = Apiario.objects.get(id=apiario_id)
+            caixa_racional = CaixaRacional(apiario=apiario, identificador = dados_form['identificador'], especie = dados_form['especie'])
+            caixa_racional.save()
+
+            caixas_racionais = CaixaRacional.objects.filter(apiario=apiario)
+            apiario = Apiario.objects.get(id=apiario_id)
+
+            contexto = {
+                'caixas_racionais': caixas_racionais,
+                'apiario': apiario
+                }
+
+            return render(request, 'caixaRacional.html', contexto)
+
+        return render(request, self.template_name, {'form':form})
+
+
+@login_required
+def deletar_apiario(request, apiario_id):
+	apiario = Apiario.objects.get(id=apiario_id)
+	apiario.excluir_apiario()
+	
+	perfil_logado = get_usuario_logado(request)
+	apiarios = Apiario.objects.filter(apicultor=perfil_logado.apicultor.id)
+
+	contexto = {
+		'perfil_logado': perfil_logado,
+		'apiarios':apiarios
+	}
+
+	return render(request, 'index.html', contexto)
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
