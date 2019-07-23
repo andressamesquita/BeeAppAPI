@@ -85,6 +85,40 @@ class RegistrarCaixaRacionalView(View):
 
         return render(request, self.template_name, {'form':form})
 
+class RegistrarPerdaView(View):
+    template_name = 'registrarPerda.html'
+
+    def get(self, request, apiario_id):
+        apiario = Apiario.objects.get(id=apiario_id)
+
+        contexto = {
+            "apiario": apiario
+        }
+
+        return render (request, self.template_name, contexto)
+
+    def post(self, request, apiario_id):
+        form = RegistrarPerdaForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            dados_form = form.cleaned_data
+            apiario = Apiario.objects.get(id=apiario_id)
+            perda = Perda(apiario=apiario, tipo_perda = dados_form['tipo_perda'], qtd_colmeias_perdidas = dados_form['qtd_colmeias_perdidas'], 
+                            data_registro_perda = dados_form['data_registro_perda'], especie_perdida = dados_form['especie_perdida'], foto_perda = dados_form['foto_perda'])
+            perda.save()
+
+            perdas = Perda.objects.filter(apiario=apiario)
+            apiario = Apiario.objects.get(id=apiario_id)
+
+            contexto = {
+                'perdas': perdas,
+                'apiario': apiario
+                }
+
+            return render(request, 'perdasRegistradas.html', contexto)
+
+        return render(request, self.template_name, {'form':form})
+
 
 @login_required
 def deletar_apiario(request, apiario_id):
@@ -100,6 +134,7 @@ def deletar_apiario(request, apiario_id):
 	}
 
 	return render(request, 'index.html', contexto)
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

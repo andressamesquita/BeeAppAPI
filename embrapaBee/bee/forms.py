@@ -20,3 +20,16 @@ class RegistrarCaixaRacionalForm(forms.Form):
         errors = self._errors.setdefault(forms.forms.NON_FIELD_ERRORS, forms.utils.ErrorList())
         errors.append(message)
 
+
+class RegistrarPerdaForm(forms.Form):
+
+    tipo_perda = forms.CharField(required=True)
+    qtd_colmeias_perdidas = forms.IntegerField(required=True)
+    data_registro_perda = forms.DateTimeField(required=True)
+    especie_perdida = forms.CharField(required=True)
+    foto_perda = forms.FileField(required=False)
+
+    def adiciona_erro(self, message):
+        errors = self._errors.setdefault(forms.forms.NON_FIELD_ERRORS, forms.utils.ErrorList())
+        errors.append(message)
+

@@ -58,8 +58,9 @@ class Perda(models.Model):
     qtd_colmeias_perdidas = models.IntegerField()
     data_registro_perda = models.DateTimeField(auto_now_add=True)
     especie_perdida = models.CharField(max_length=255, null=False)
-    #foto_perda = models.ImageField(upload_to='fotos_perdas', null=True, blank = True)
     apiario = models.ForeignKey('Apiario', on_delete=models.CASCADE, related_name="perdas")
+
+    foto_perda = models.ImageField(upload_to='fotos_perdas', null=True, blank = True)
 
     class Meta:
         ordering = ['-data_registro_perda']

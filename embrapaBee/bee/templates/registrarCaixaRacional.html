@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block body %}
 
-<form class = "form-signin"  method="post" action="{% url 'novaCaixaRacional' apiario.id %}">
+<form class = "form-signin"  method="post" action="{% url 'nova_caixa_racional' apiario.id %}">
 	{% csrf_token %}
 
 	<h2 class="form-signin-heading">Adicione uma Caixa Racional</h2> 

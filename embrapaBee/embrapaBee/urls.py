@@ -42,9 +42,10 @@ urlpatterns = [
     path('registrar/', RegistrarUsuarioView.as_view(), name="registrar"),
     path('login/', LoginView.as_view(), name="login"),
     path('logout/', v.LogoutView.as_view(template_name = 'login.html'), name="logout"),
-    path('apicultor/apiarios/novo_apiario', RegistrarApiarioView.as_view(), name='novoApiario'),
+    path('apicultor/apiarios/novo_apiario', RegistrarApiarioView.as_view(), name='novo_apiario'),
     path('apicultor/apiarios/<int:apiario_id>/excluir', deletar_apiario, name='excluir_apiario'),  
-    path('apiarios/caixa/<int:apiario_id>', RegistrarCaixaRacionalView.as_view(), name='novaCaixaRacional'),
+    path('apiarios/caixa/<int:apiario_id>', RegistrarCaixaRacionalView.as_view(), name='nova_caixa_racional'),
+    path('apiarios/perda/<int:apiario_id>', RegistrarPerdaView.as_view(), name='nova_perda'),
     
 
 

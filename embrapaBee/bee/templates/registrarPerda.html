@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block body %}
+
+<form class = "form-signin" enctype = "multipart/form-data" method="POST" action="{% url 'nova_perda' apiario.id %}">
+	{% csrf_token %}
+
+	<h2 class="form-signin-heading">Registre sua perda</h2> 
+    
+    <input 	name="data_registro_perda" id = "id_data_registro_perda" type="date" class = "form-control" placeholder="Data" required autofocus>
+
+    <input 	name="qtd_colmeias_perdidas" id = "id_qtd_colmeias_perdidas" class = "form-control" placeholder="Quantidade de colmeias perdidas">
+    
+    <input 	name="especie_perdida" id = "id_especie_perdida" class = "form-control" placeholder="Espécie perdida">
+
+    <select	name="tipo_perda" id = "id_tipo_perda" class = "form-control">
+        <option value="MORTE POR ABANDONO">Morte por abandono</option>
+        <option value="MORTE POR AGROTÓXICO">Morte por agrotóxico</option>
+	</select>  
+	<br>
+	
+	<div class="row">
+		<div class="col-lg-1">
+			<input type = "file" style = "margin-left:20%;" placeholder = "Foto" name = "foto_perda"/>
+		</div>	
+	</div>
+	<br>
+	
+	<button class="btn btn-lg btn-primary btn-block" type = "submit" value="Perda">Registrar</button>
+
+    
+	{% if form.errors %}		
+	<div class="alert alert-danger">
+		<button type="button" class="close"
+				data-dismiss="alert" aria-hidden="true">x				
+		</button>
+		{{ form.non_field_errors }}
+	</div>		
+	{% endif %}
+</form>
+
+
+{% endblock %}
