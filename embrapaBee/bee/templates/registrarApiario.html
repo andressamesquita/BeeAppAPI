@@ -3,17 +3,20 @@
 
 <form class = "form-signin"  method="post" action="{% url 'novo_apiario' %}">
 	{% csrf_token %}
-
+	
 	<h2 class="form-signin-heading">Adicione seu (s) apiario</h2>
+	<h4>Cultura</h4>
     <select	name="tipo" id = "id_tipo" class = "form-control">
-        <option value="MELIPONÁRIO">Meliponário</option>
-        <option value="APIÁRIO">Apiário</option>
+        <option value="MELIPONÁRIO">Meliponicultura</option>
+        <option value="APIÁRIO">Apicultura</option>
     </select>     
-    
-    <input 	name="qtd_colmeias" id = "id_qtd_colmeias" class = "form-control" placeholder="Quantidade de colmeias" required autofocus>
-
+	
+	<h4>Quantidade de colmeias</h4>
+    <input 	name="qtd_colmeias" id = "id_qtd_colmeias" class = "form-control" placeholder="Ex: 7" required autofocus>
+	
+	<h4>Localização</h4>
 	<input 	name="localizacao" id = "id_localizacao" class = "form-control" placeholder="Localização">
-   
+	<br>
 	<button class="btn btn-lg btn-primary btn-block" type = "submit" value="Apiario">Registrar</button>
 
 	{% if form.errors %}		

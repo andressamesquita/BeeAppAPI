@@ -5,21 +5,26 @@
 	{% csrf_token %}
 
 	<h2 class="form-signin-heading">Registre sua perda</h2> 
-    
+	<br>
+	<h4>Data</h4>
     <input 	name="data_registro_perda" id = "id_data_registro_perda" type="date" class = "form-control" placeholder="Data" required autofocus>
 
-    <input 	name="qtd_colmeias_perdidas" id = "id_qtd_colmeias_perdidas" class = "form-control" placeholder="Quantidade de colmeias perdidas">
-    
-    <input 	name="especie_perdida" id = "id_especie_perdida" class = "form-control" placeholder="Espécie perdida">
+	<h4>Quantidade de colmeias perdidas</h4>
+    <input 	name="qtd_colmeias_perdidas" id = "id_qtd_colmeias_perdidas" class = "form-control" placeholder="Ex: 1">
+	
+	<h4>Espécie perdida</h4>
+    <input 	name="especie_perdida" id = "id_especie_perdida" class = "form-control" placeholder="Ex: Jandaíra">
 
+	<h4>Causa da perda</h4>
     <select	name="tipo_perda" id = "id_tipo_perda" class = "form-control">
-        <option value="MORTE POR ABANDONO">Morte por abandono</option>
-        <option value="MORTE POR AGROTÓXICO">Morte por agrotóxico</option>
+        <option value="POR ABANDONO">Abandono de colmeia</option>
+        <option value="POR MORTE">Morte</option>
 	</select>  
 	<br>
 	
+	<h4>Imagem da colmeia perdida</h4>
 	<div class="row">
-		<div class="col-lg-1">
+		<div class="col-lg-1">	
 			<input type = "file" style = "margin-left:20%;" placeholder = "Foto" name = "foto_perda"/>
 		</div>	
 	</div>
