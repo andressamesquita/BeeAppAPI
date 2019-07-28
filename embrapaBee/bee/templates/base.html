@@ -6,17 +6,30 @@
 	<meta name="viewport" content="width=device-width">
     <title>Bee</title>
 
-	<link rel="stylesheet" href="{% static 'style/main.css' %}"/>
-	<link rel="stylesheet" href="{% static 'style/signin.css' %}"/>
 	<link rel="stylesheet" href="{% static 'style/bootstrap.css' %}"/>
+	<link rel="stylesheet" href="{% static 'style/signin.css' %}"/>
+	<link rel="stylesheet" href="{% static 'style/main.css' %}"/>
+
+	<script src="{% static 'scripts/vendor/jquery-1.9.1.js' %}"></script>
+	<script src="{% static 'scripts/vendor/bootstrap-min.js' %}"></script>
+	<script src="{% static 'scripts/vendor/bootbox.min.js' %}"></script>
+	<script src="{% static 'scripts/vendor/app.js' %}"></script>
+	
     
 </head>
 <body>
-	
-	
-	{% block body %}
-	
-	{% endblock %}
+	<header>
+		
+			<nav class="navbar sticky-top navbar-light bg-light">
+				<a class="navbar-brand pull-right" href="{% url 'logout' %}">Sair</a>
+			</nav>
+			
+	</header>
+	<div class="container">
+		{% block body %}
+
+		{% endblock %}
+	</div>
 	
 </body>
 </html>

@@ -14,9 +14,11 @@ def index(request):
     perfil_logado = get_usuario_logado(request)
     apiarios = Apiario.objects.filter(apicultor=perfil_logado.apicultor.id)
     
+    
     contexto = {
         'perfil_logado': perfil_logado,
         'apiarios': apiarios,
+        
         
     }
     return render(request, 'index.html', contexto)

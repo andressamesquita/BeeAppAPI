@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block body %}
 
 <form class = "form-signin" enctype = "multipart/form-data" method="POST" action="{% url 'nova_perda' apiario.id %}">
