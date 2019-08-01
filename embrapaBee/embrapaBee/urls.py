@@ -47,6 +47,10 @@ urlpatterns = [
     path('apiarios/caixa/<int:apiario_id>', RegistrarCaixaRacionalView.as_view(), name='nova_caixa_racional'),
     path('apiarios/perda/<int:apiario_id>', RegistrarPerdaView.as_view(), name='nova_perda'),
     
+    path('', include('pwa.urls')),
+
+    path('base_layout', base_layout,name='base_layout'),
+
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

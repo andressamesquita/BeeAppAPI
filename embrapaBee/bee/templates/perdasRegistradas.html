@@ -1,1 +1,35 @@
-ok
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block body %}
+
+    <div class="panel panel-default" style="margin-top: 1em">
+        <h4 style="margin-left: 1em">Perda (s)</h4>
+        {% if perdas %}
+        <ul class="list-group">
+            {% for perda in perdas %}
+                <li class="list-group-item">
+                    <div class="container">
+                        
+                    <div class = "row">
+                        <div class = "col-sm-2">
+                            <img src="{{ perda.foto_perda.url }}" style="width:100px;">
+                        </div>
+                        <div class = "col-sm-10">
+                            <h5><strong>Causa:</strong> {{perda.tipo_perda}}</h5>
+                            <h5><strong>Data:</strong> {{perda.data_registro_perda}}</h5>
+                            <h5><strong>Espécie da perda:</strong>{{perda.especie_perdida}}</h5>
+                    
+                           </div>
+                    </div>
+                    </div>
+                </li>    
+            {% endfor %}
+        </ul>   
+        {% endif %}
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

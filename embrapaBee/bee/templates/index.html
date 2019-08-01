@@ -44,12 +44,12 @@
     <div class="col-sm-2">
             <div class="panel panel-default" style="margin-top: 1em">
                     <h4 style="margin-left: 1em">Perdas</h4>
-                {% if apiarios %}
+                {% if perdas %}
                 <ul class="list-group">
-                    {% for apiario in apiarios %}
+                    {% for perda in perdas %}
                         
                         <li class="list-group-item">
-                            {{apiario.perdas}}
+                            {{perda.apiario.tipo_perda}}
                         </li>    
                     {% endfor %}                       
                 </ul>   

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from django.views.generic.base import View
 from bee.serializers import *
@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from bee.forms import *
 # Create your views here.
 
-
+@login_required
 def index(request):
 
     perfil_logado = get_usuario_logado(request)
@@ -17,11 +17,11 @@ def index(request):
     
     contexto = {
         'perfil_logado': perfil_logado,
-        'apiarios': apiarios,
-        
-        
+        'apiarios': apiarios,     
     }
+
     return render(request, 'index.html', contexto)
+
 
 @login_required
 def get_usuario_logado(request):	
@@ -137,6 +137,9 @@ def deletar_apiario(request, apiario_id):
 
 	return render(request, 'index.html', contexto)
 
+def base_layout(request):
+	template='/bee/templates/base.html'
+	return render(request,template)
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

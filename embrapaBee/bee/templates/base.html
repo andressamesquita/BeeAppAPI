@@ -1,7 +1,9 @@
+{% load pwa %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+	{% progressive_web_app_meta%}
 	<meta charset = "UTF-8"/>
 	<meta name="viewport" content="width=device-width">
     <title>Bee</title>
@@ -20,7 +22,7 @@
 <body>
 	<header>
 		
-			<nav class="navbar sticky-top navbar-light bg-light">
+			<nav class="navbar sticky-top navbar-light bg-light navbar-expand-xl | lg | md | sm">
 				<a class="navbar-brand pull-right" href="{% url 'logout' %}">Sair</a>
 			</nav>
 			
